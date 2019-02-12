@@ -19,15 +19,24 @@ import lombok.experimental.Accessors;
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    /**
+     * 主键id
+     */
+    private String id;
 
-    private Integer id;
-
+    /**
+     * 用户名
+     */
     private String name;
 
-    private Integer sex;
-
+    /**
+     * 账号
+     */
     private String email;
 
+    /**
+     * 密码，通过MD5加密后保存
+     */
     private String password;
 
 

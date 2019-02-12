@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.family.entity.User;
 import com.family.service.impl.UserServiceImpl;
+import com.family.utils.Common;
 import com.family.utils.ResponseResult;
 import freemarker.template.utility.StringUtil;
 import io.swagger.annotations.Api;
@@ -72,7 +73,7 @@ public class UserController {
     @PutMapping(value = "user")
     @ResponseBody
     public ResponseResult register(User user){
-        user.setId(4);
+        user.setId(Common.getId());
         boolean flag;
         try {
             flag = userService.save(user);
