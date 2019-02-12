@@ -73,6 +73,4 @@ public class HallController {
             return new ResponseResult(ResultCode.FAILURE.getIndex(),ResultCode.FAILURE.getMessage(),hall);
         }
     }
-
-
 }

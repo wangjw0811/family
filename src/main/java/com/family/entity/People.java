@@ -2,6 +2,8 @@ package com.family.entity;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -27,6 +29,11 @@ public class People implements Serializable {
      * 父级id
      */
     private String parentId;
+
+    /**
+     * 身份证号
+     */
+    private String idNumber;
 
     /**
      * 籍贯
@@ -81,6 +88,7 @@ public class People implements Serializable {
     /**
      * 性别
      */
+    @ApiModelProperty(example = "0 女 1 男")
     private Integer sex;
 
     /**
@@ -91,6 +99,7 @@ public class People implements Serializable {
     /**
      * 婚嫁
      */
+    @ApiModelProperty(value = "是否婚嫁",example = "0 未婚 1 已婚")
     private Integer ismarriage;
 
     /**
@@ -148,6 +157,9 @@ public class People implements Serializable {
      */
     private LocalDateTime deathDay;
 
+    /**
+     * 葬地
+     */
     private String cemetery;
 
     /**
