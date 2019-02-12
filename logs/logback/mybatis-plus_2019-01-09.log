@@ -1,9 +1,0 @@
-2019-1-9 14:33:56 http-nio-8083-exec-4 DEBUG ==>  Preparing: SELECT COUNT(1) FROM user 
-2019-1-9 14:33:56 http-nio-8083-exec-4 DEBUG ==> Parameters: 
-2019-1-9 14:33:56 http-nio-8083-exec-4 DEBUG ==>  Preparing: SELECT id,name,sex FROM user LIMIT ?,? 
-2019-1-9 14:33:56 http-nio-8083-exec-4 DEBUG ==> Parameters: 0(Long), 10(Long)
-2019-1-9 14:33:56 http-nio-8083-exec-4 DEBUG <==      Total: 3
-2019-1-9 14:34:30 main INFO Starting DemoApplication on wangjw318 with PID 19664 (D:\wangjw\JAVA\IdeaProject\mybatis-plus\target\classes started by wangjiewang in D:\wangjw\JAVA\IdeaProject\mybatis-plus)
-2019-1-9 14:34:30 main DEBUG Running with Spring Boot v2.1.1.RELEASE, Spring v5.1.3.RELEASE
-2019-1-9 14:34:30 main INFO No active profile set, falling back to default profiles: default
-2019-1-9 14:34:34 main INFO Started DemoApplication in 3.891 seconds (JVM running for 5.08)
