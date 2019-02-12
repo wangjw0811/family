@@ -2,12 +2,15 @@ package com.family.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.family.entity.Hall;
 import com.family.entity.User;
 import com.family.enums.ResultCode;
 import com.family.service.impl.HallServiceImpl;
 import com.family.utils.Common;
 import com.family.utils.ResponseResult;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +27,7 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("/hall")
+@Api(description = "姓氏")
 public class HallController {
     @Autowired
     HallServiceImpl hallService;
@@ -35,6 +39,14 @@ public class HallController {
         wrapper.setEntity(hall);
         hall = hallService.getOne(wrapper);
         return new ResponseResult(ResultCode.SUCCESS.getIndex(),ResultCode.SUCCESS.getMessage(),hall);
+    }
+
+    @GetMapping(value="/all")
+    @ResponseBody
+    @ApiOperation(value = "分页查询姓氏")
+    public IPage<Hall> getSurnames(Hall hall){
+        IPage<Hall> page = new Page<>();
+        return hallService.page(page);
     }
 
     @PutMapping
