@@ -45,5 +45,9 @@ public class Hall implements Serializable {
      */
     private String hallCouplets;
 
+    /**
+     * 辈分集
+     */
+    private String seniorities;
 
 }
