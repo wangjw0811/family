@@ -1,6 +1,9 @@
 package com.family.entity;
 
 import java.io.Serializable;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
