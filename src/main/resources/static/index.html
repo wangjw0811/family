@@ -1,49 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<link>
+<head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>家族网</title>
     <link type="text/css" href="layui/css/layui.css" rel="stylesheet"/>
 </head>
 <body>
-    <div>
-        <ul class="layui-nav">
-            <li class="layui-nav-item"><a href="#">标题一</a></li>
-            <li class="layui-nav-item"><a href="#">标题二</a></li>
-            <li class="layui-nav-item"><a href="#">标题三</a></li>
-            <li class="layui-nav-item layui-this">
-                <a href="javascript:;">产品</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">选项1</a></dd>
-                    <dd><a href="">选项2</a></dd>
-                    <dd><a href="">选项3</a></dd>
-                </dl>
-            </li>
-        </ul>
-        <ul class="layui-nav layui-layout-right">
-            <!--<li class="layui-nav-item">-->
-                <!--<a href="javascript:;">-->
-                    <!--<img src="http://t.cn/RCzsdCq" class="layui-nav-img">-->
-                    <!--贤心-->
-                <!--</a>-->
-                <!--<dl class="layui-nav-child">-->
-                    <!--<dd><a href="">基本资料</a></dd>-->
-                    <!--<dd><a href="">安全设置</a></dd>-->
-                <!--</dl>-->
-            <!--</li>-->
-            <li class="layui-nav-item"><a href="/toLogin">登录</a></li>
-            <!--<li class="layui-nav-item"><a href="/toRegister">注册</a></li>-->
-        </ul>
+    <iframe src="head.html" width="100%"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes"></iframe>
+    <div class="layui-container">
+        <div>
+            <embed src="/mv/a.mp4" width="320" height="240"/><br>
+            <embed src="/mv/b.mp4" width="320" height="240"/>
+        </div>
+        <div>
+            <iframe name="contain" frameborder="no"></iframe>
+        </div>
     </div>
-    <script type="text/javascript" src="layui/layui.all.js"></script>
-    <script>
-        layui.use('element', function(){
-            var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
-            //监听导航点击
-            element.on('nav(demo)', function(elem){
-                layer.msg(elem.text());
-            });
-        });
-    </script>
+    <iframe src="foot.html" width="100%"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes"></iframe>
 </body>
 </html>
