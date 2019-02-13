@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.family.entity.User;
+import com.family.enums.ResultCode;
 import com.family.service.impl.UserServiceImpl;
 import com.family.utils.Common;
 import com.family.utils.ResponseResult;
@@ -43,30 +44,25 @@ public class UserController {
     @GetMapping(value="checkUser")
     @ApiOperation(value = "查询")
     @ResponseBody
-    public ResponseResult checkUser(User user,String email){
+    public ResponseResult checkUser(User user,String account){
         QueryWrapper<User> wrapper = new QueryWrapper<>();
-        if(!StringHelper.isNullOrEmptyString(email)){
-            user.setEmail(email);
-        }
-        wrapper.setEntity(user);
         String password = user.getPassword();
-        user = userService.getOne(wrapper);
-        if(password == null){//注册时验证用户名是否存在
-            if(null != user){
-                return new ResponseResult(-1,"当前用户名已被占用",user);
-            }
-        }else if(null != email && null != password){//登录验证
-            if(null != user){
-                return new ResponseResult(200,"登录成功",user);
-            }else{
-                return new ResponseResult(-1,"账号密码不对",user);
-            }
+        user.setEmail(account);//先通过邮箱匹配
+        user.setPassword(Common.md5(password));
+        wrapper.setEntity(user);
+        User user_email = userService.getOne(wrapper);
+        if(user_email == null){//邮箱匹配失败再通过身份证号匹配
+            user.setEmail(null);
+            user.setIdNumber(Common.md5(account));
+            wrapper.setEntity(user);
+            user = userService.getOne(wrapper);
         }
-        if(StringHelper.isNullOrEmptyString(email)){
-            return new ResponseResult(-1,"账号不能为空",user);
+        if(user != null){
+            return new ResponseResult(ResultCode.SUCCESS.getIndex(),ResultCode.SUCCESS.getMessage(),user);
         }else{
-            return new ResponseResult(200,"账号有效",user);
+            return new ResponseResult(ResultCode.FAILURE.getIndex(),"账号或密码错误",user);
         }
+
     }
 
 

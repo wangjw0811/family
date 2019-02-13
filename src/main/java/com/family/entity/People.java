@@ -31,7 +31,7 @@ public class People implements Serializable {
     private String parentId;
 
     /**
-     * 身份证号
+     * 身份证号，通过MD5加密后保存
      */
     private String idNumber;
 

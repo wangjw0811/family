@@ -7,7 +7,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ *  账号信息
  * </p>
  *
  * @author test
@@ -25,9 +25,19 @@ public class User implements Serializable {
     private String id;
 
     /**
+     * 人员id
+     */
+    private String peopleId;
+
+    /**
      * 用户名
      */
     private String name;
+
+    /**
+     * 身份证号，通过MD5加密后保存
+     */
+    private String idNumber;
 
     /**
      * 账号
