@@ -39,8 +39,11 @@
                 url:"/api/checkUser",
                 type:"get",
                 data:param,
+                dataType:"json",
                 success:function(data){//res为相应体,function为回调函数
                     if(data.resultCode==200){
+                        data = JSON.stringify(data.data);
+                        alert(data);
                         window.location.href="/loginSuccess";
                     }else{
                         layer.msg(data.resultMsg);
