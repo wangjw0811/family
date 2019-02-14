@@ -9,13 +9,14 @@ import com.family.enums.ResultCode;
 import com.family.service.impl.UserServiceImpl;
 import com.family.utils.Common;
 import com.family.utils.ResponseResult;
-import freemarker.template.utility.StringUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.validator.internal.util.StringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -32,13 +33,18 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     UserServiceImpl userService;
+
     @GetMapping(value="user")
     @ApiOperation(value = "查询")
     @ResponseBody
-    public IPage<User> list(User user){
+    public String list(User user){
         IPage<User> page = new Page<>(1,10);
-        QueryWrapper<User> wrapper = new QueryWrapper<User>().like("name",user.getName());
-        return userService.page(page);
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.setEntity(user);
+        IPage<Map<String, Object>> mapIPage = userService.pageMaps(page, wrapper);
+        String result = JSONObject.toJSONString(new ResponseResult(ResultCode.SUCCESS.getIndex(),ResultCode.SUCCESS.getMessage(),mapIPage));
+        log.info(result);
+        return result;
     }
 
     @GetMapping(value="checkUser")

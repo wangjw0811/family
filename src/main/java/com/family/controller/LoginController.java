@@ -14,18 +14,22 @@ public class LoginController {
     UserServiceImpl userService;
     @GetMapping(value="toLogin")
     public String toLogin(){
-        return "/base/login";
+        return "base/login";
     }
 
     @GetMapping(value="loginSuccess")
-    public String userList(String data){
-        System.out.println(data);
-        return "/base/success";
+    public String userList(){
+        return "base/success";
     }
 
     @GetMapping(value="toRegister")
     public String toRegister(){
-        return "/base/register";
+        return "base/register";
+    }
+
+    @GetMapping(value = "toUsers")
+    public String toUsers(){
+        return "user/users";
     }
 
 }
