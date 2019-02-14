@@ -6,45 +6,51 @@
     <link type="text/css" href="layui/css/layui.css" rel="stylesheet"/>
 </head>
 <body>
+<!--<div>-->
+<!--<iframe src="head.html" width="100%"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes"></iframe>-->
+<!--</div>-->
+<div class="layui-header">
+    <ul class="layui-nav">
+        <li class="layui-nav-item"><a href="/loginSuccess" target="contain">首页</a></li>
+        <li class="layui-nav-item"><a href="#">百家姓</a></li>
+        <li class="layui-nav-item"><a href="#">论坛</a></li>
+        <li class="layui-nav-item"><a href="#">联系我们</a></li>
+        <li class="layui-nav-item layui-this">
+            <a href="javascript:;">产品</a>
+            <dl class="layui-nav-child">
+                <dd><a href="">选项1</a></dd>
+                <dd><a href="">选项2</a></dd>
+                <dd><a href="">选项3</a></dd>
+            </dl>
+        </li>
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+        <li class="layui-nav-item"><a id="loginBtn" href="javascript:void(0)" >登录</a></li>
+    </ul>
+</div>
+<div>
     <!--<div>-->
-        <!--<iframe src="head.html" width="100%"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes"></iframe>-->
+    <!--<embed src="/mv/a.mp4" width="320" height="240"/>-->
     <!--</div>-->
-    <div class="layui-header">
-        <ul class="layui-nav">
-            <li class="layui-nav-item"><a href="/loginSuccess" target="contain">首页</a></li>
-            <li class="layui-nav-item"><a href="#">百家姓</a></li>
-            <li class="layui-nav-item"><a href="#">论坛</a></li>
-            <li class="layui-nav-item"><a href="#">联系我们</a></li>
-            <li class="layui-nav-item layui-this">
-                <a href="javascript:;">产品</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">选项1</a></dd>
-                    <dd><a href="">选项2</a></dd>
-                    <dd><a href="">选项3</a></dd>
-                </dl>
-            </li>
-        </ul>
-        <ul class="layui-nav layui-layout-right">
-            <li class="layui-nav-item"><a href="/toLogin" target="contain">登录</a></li>
-        </ul>
-    </div>
+    <!--<div>-->
+    <!--<embed src="/mv/b.mp4" width="320" height="240"/>-->
+    <!--</div>-->
     <div>
-        <!--<div>-->
-            <!--<embed src="/mv/a.mp4" width="320" height="240"/>-->
-        <!--</div>-->
-        <!--<div>-->
-            <!--<embed src="/mv/b.mp4" width="320" height="240"/>-->
-        <!--</div>-->
-        <div>
-            <iframe width="100%" name="contain" frameborder="no" height="900"></iframe>
-        </div>
+        <iframe width="100%" name="contain" frameborder="no" height="900"></iframe>
     </div>
-    <!--<div>-->
-        <!--<iframe src="foot.html" width="100%"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes"></iframe>-->
-    <!--</div>-->
-    <div class="layui-footer">
-        地址：浙江杭州余杭<br>
-        联系电话:13135518991
-    </div>
-    </body>
+</div>
+<!--<div>-->
+<!--<iframe src="foot.html" width="100%"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes"></iframe>-->
+<!--</div>-->
+<div class="layui-footer">
+    地址：浙江杭州余杭<br>
+    联系电话:13135518991
+</div>
+<script src="./layui/layui.js"></script>
+<script>
+    layui.config({
+        base:"./lib/"
+    }).use("index");
+</script>
+</body>
 </html>
