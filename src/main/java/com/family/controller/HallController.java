@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.family.entity.Hall;
-import com.family.entity.User;
 import com.family.enums.ResultCode;
 import com.family.service.impl.HallServiceImpl;
 import com.family.utils.Common;
@@ -16,12 +15,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-import java.util.UUID;
-
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author test
@@ -34,51 +30,52 @@ import java.util.UUID;
 public class HallController {
     @Autowired
     HallServiceImpl hallService;
-    @GetMapping(value="/hall")
+
+    @GetMapping(value = "/hall")
     @ResponseBody
     @ApiOperation(value = "姓氏查询")
-    public ResponseResult getSurname(Hall hall){
+    public ResponseResult getSurname(Hall hall) {
         QueryWrapper<Hall> wrapper = new QueryWrapper<>();
         wrapper.setEntity(hall);
         hall = hallService.getOne(wrapper);
-        return new ResponseResult(ResultCode.SUCCESS.getIndex(),ResultCode.SUCCESS.getMessage(),hall);
+        return new ResponseResult(ResultCode.SUCCESS.getIndex(), ResultCode.SUCCESS.getMessage(), hall);
     }
 
-    @GetMapping(value="/halls")
+
+    @GetMapping(value = "/halls")
     @ResponseBody
     @ApiOperation(value = "分页查询姓氏")
-    public String getSurnames(Hall hall){
-        IPage<Hall> page = new Page<>(1,10);
+    public ResponseResult getSurnames(Hall hall) {
+        IPage<Hall> page = new Page<>(1, 10);
         QueryWrapper<Hall> wrapper = new QueryWrapper<>();
         wrapper.setEntity(hall);
-        IPage<Map<String, Object>> mapIPage = hallService.pageMaps(page, wrapper);
-        String result = ResponseResult.returnData(mapIPage);
-        log.info(result);
-        return result;
+        IPage<Hall> mapIPage = hallService.page(page, wrapper);
+        return new ResponseResult(ResultCode.SUCCESS.getIndex(), ResultCode.SUCCESS.getMessage(), mapIPage);
     }
 
-    @PutMapping(value="/hall")
+
+    @PutMapping(value = "/hall")
     @ResponseBody
     @ApiOperation(value = "姓氏新增")
-    public ResponseResult addSurname(Hall hall){
+    public ResponseResult addSurname(Hall hall) {
         hall.setId(Common.getId());
         boolean flag = hallService.save(hall);
-        if(flag){
-            return new ResponseResult(ResultCode.SUCCESS.getIndex(),ResultCode.SUCCESS.getMessage(),hall);
-        }else{
-            return new ResponseResult(ResultCode.FAILURE.getIndex(),ResultCode.FAILURE.getMessage(),hall);
+        if (flag) {
+            return new ResponseResult(ResultCode.SUCCESS.getIndex(), ResultCode.SUCCESS.getMessage(), hall);
+        } else {
+            return new ResponseResult(ResultCode.FAILURE.getIndex(), ResultCode.FAILURE.getMessage(), hall);
         }
     }
 
-    @PostMapping(value="/hall")
+    @PostMapping(value = "/hall")
     @ResponseBody
     @ApiOperation(value = "姓氏修改")
-    public ResponseResult modifySurname(@RequestBody Hall hall){
+    public ResponseResult modifySurname(@RequestBody Hall hall) {
         boolean flag = hallService.updateById(hall);
-        if(flag){
-            return new ResponseResult(ResultCode.SUCCESS.getIndex(),ResultCode.SUCCESS.getMessage(),hall);
-        }else{
-            return new ResponseResult(ResultCode.FAILURE.getIndex(),ResultCode.FAILURE.getMessage(),hall);
+        if (flag) {
+            return new ResponseResult(ResultCode.SUCCESS.getIndex(), ResultCode.SUCCESS.getMessage(), hall);
+        } else {
+            return new ResponseResult(ResultCode.FAILURE.getIndex(), ResultCode.FAILURE.getMessage(), hall);
         }
     }
 }
