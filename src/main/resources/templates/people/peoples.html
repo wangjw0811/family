@@ -94,7 +94,7 @@
         table.render({
             elem: '#demo'
             ,height: 420
-            ,url: '/api/user/' //数据接口
+            ,url: '/api/peoples/' //数据接口
             ,type: 'get'
             ,title: '用户表'
             ,page: true //开启分页
@@ -110,8 +110,13 @@
                 [
                     {type: 'checkbox', fixed: 'left'}
                     // ,{field: 'id', title: 'ID', width:300, sort: true, fixed: 'left', totalRowText: '合计：'}
-                    ,{field: 'name', title: '用户名', width:80}
-                    ,{field: 'email', title: '账号', width:200}
+                    ,{field: 'surname', title: '姓氏', width:80}
+                    ,{field: 'forename', title: '名', width:80}
+                    ,{field: 'style_name', title: '字', width:80}
+                    ,{field: 'seniority', title: '辈分', width:80}
+                    ,{field: 'generation', title: '代数', width:80}
+                    ,{field: 'genealogy_name', title: '谱名', width:80}
+                    ,{field: 'sex', title: '性别', width:80}
                     ,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
                 ]
             ]

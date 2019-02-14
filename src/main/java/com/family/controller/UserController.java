@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -42,7 +43,7 @@ public class UserController {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.setEntity(user);
         IPage<Map<String, Object>> mapIPage = userService.pageMaps(page, wrapper);
-        String result = JSONObject.toJSONString(new ResponseResult(ResultCode.SUCCESS.getIndex(),ResultCode.SUCCESS.getMessage(),mapIPage));
+        String result = ResponseResult.returnData(mapIPage);
         log.info(result);
         return result;
     }

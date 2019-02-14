@@ -32,4 +32,14 @@ public class LoginController {
         return "user/users";
     }
 
+    @GetMapping(value = "toHalls")
+    public String toHalls(){
+        return "hall/halls";
+    }
+
+    @GetMapping(value = "toPeoples")
+    public String toPeoples(){
+        return "people/peoples";
+    }
+
 }

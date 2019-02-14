@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -33,14 +34,14 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/people")
+@RequestMapping("/api")
 @Api(description = "人员")
 public class PeopleController {
     @Autowired
     PeopleServiceImpl peopleService;
     @Autowired
     UserServiceImpl userService;
-    @GetMapping
+    @GetMapping(value = "/people")
     @ResponseBody
     @ApiOperation(value = "人员查询")
     public ResponseResult getSurname(People people) {
@@ -50,15 +51,20 @@ public class PeopleController {
         return new ResponseResult(ResultCode.SUCCESS.getIndex(), ResultCode.SUCCESS.getMessage(), people);
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping(value = "/peoples")
     @ResponseBody
     @ApiOperation(value = "分页查询人员")
-    public IPage<People> getSurnames(People people) {
-        IPage<People> page = new Page<>();
-        return peopleService.page(page);
+    public String getSurnames(People people) {
+        IPage<People> page = new Page<>(1,10);
+        QueryWrapper<People> wrapper = new QueryWrapper<>();
+        wrapper.setEntity(people);
+        IPage<Map<String, Object>> mapIPage = peopleService.pageMaps(page, wrapper);
+        String result = ResponseResult.returnData(mapIPage);
+        log.info(result);
+        return result;
     }
 
-    @PutMapping
+    @PutMapping(value = "/people")
     @ResponseBody
     @ApiOperation(value = "人员新增")
     public ResponseResult addSurname(People people) {
@@ -71,7 +77,7 @@ public class PeopleController {
         }
     }
 
-    @PostMapping
+    @PostMapping(value = "/people")
     @ResponseBody
     @ApiOperation(value = "人员修改")
     @Transactional

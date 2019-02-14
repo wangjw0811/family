@@ -12,9 +12,11 @@ import com.family.utils.Common;
 import com.family.utils.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -26,12 +28,13 @@ import java.util.UUID;
  * @since 2019-02-12
  */
 @RestController
-@RequestMapping("/hall")
+@RequestMapping("/api")
 @Api(description = "姓氏")
+@Slf4j
 public class HallController {
     @Autowired
     HallServiceImpl hallService;
-    @GetMapping
+    @GetMapping(value="/hall")
     @ResponseBody
     @ApiOperation(value = "姓氏查询")
     public ResponseResult getSurname(Hall hall){
@@ -41,15 +44,20 @@ public class HallController {
         return new ResponseResult(ResultCode.SUCCESS.getIndex(),ResultCode.SUCCESS.getMessage(),hall);
     }
 
-    @GetMapping(value="/all")
+    @GetMapping(value="/halls")
     @ResponseBody
     @ApiOperation(value = "分页查询姓氏")
-    public IPage<Hall> getSurnames(Hall hall){
-        IPage<Hall> page = new Page<>();
-        return hallService.page(page);
+    public String getSurnames(Hall hall){
+        IPage<Hall> page = new Page<>(1,10);
+        QueryWrapper<Hall> wrapper = new QueryWrapper<>();
+        wrapper.setEntity(hall);
+        IPage<Map<String, Object>> mapIPage = hallService.pageMaps(page, wrapper);
+        String result = ResponseResult.returnData(mapIPage);
+        log.info(result);
+        return result;
     }
 
-    @PutMapping
+    @PutMapping(value="/hall")
     @ResponseBody
     @ApiOperation(value = "姓氏新增")
     public ResponseResult addSurname(Hall hall){
@@ -62,7 +70,7 @@ public class HallController {
         }
     }
 
-    @PostMapping
+    @PostMapping(value="/hall")
     @ResponseBody
     @ApiOperation(value = "姓氏修改")
     public ResponseResult modifySurname(@RequestBody Hall hall){
