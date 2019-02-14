@@ -62,10 +62,10 @@ public class PeopleController {
         return new ResponseResult(ResultCode.SUCCESS.getIndex(), ResultCode.SUCCESS.getMessage(), mapIPage);
     }
 
-    @PutMapping(value = "/people")
+    @PostMapping(value = "/addPeople")
     @ResponseBody
     @ApiOperation(value = "人员新增")
-    public ResponseResult addSurname(People people) {
+    public ResponseResult addSurname(@RequestBody People people) {
         people.setId(Common.getId());
         boolean flag = peopleService.save(people);
         if (flag) {
