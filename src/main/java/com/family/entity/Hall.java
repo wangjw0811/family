@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ * 姓氏支系表
  * </p>
  *
  * @author test

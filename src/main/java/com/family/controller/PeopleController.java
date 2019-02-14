@@ -54,14 +54,12 @@ public class PeopleController {
     @GetMapping(value = "/peoples")
     @ResponseBody
     @ApiOperation(value = "分页查询人员")
-    public String getSurnames(People people) {
+    public ResponseResult getSurnames(People people) {
         IPage<People> page = new Page<>(1,10);
         QueryWrapper<People> wrapper = new QueryWrapper<>();
         wrapper.setEntity(people);
         IPage<Map<String, Object>> mapIPage = peopleService.pageMaps(page, wrapper);
-        String result = ResponseResult.returnData(mapIPage);
-        log.info(result);
-        return result;
+        return new ResponseResult(ResultCode.SUCCESS.getIndex(), ResultCode.SUCCESS.getMessage(), mapIPage);
     }
 
     @PutMapping(value = "/people")

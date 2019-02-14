@@ -38,14 +38,12 @@ public class UserController {
     @GetMapping(value="user")
     @ApiOperation(value = "查询")
     @ResponseBody
-    public String list(User user){
+    public ResponseResult list(User user){
         IPage<User> page = new Page<>(1,10);
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.setEntity(user);
         IPage<Map<String, Object>> mapIPage = userService.pageMaps(page, wrapper);
-        String result = ResponseResult.returnData(mapIPage);
-        log.info(result);
-        return result;
+        return new ResponseResult(ResultCode.SUCCESS.getIndex(), ResultCode.SUCCESS.getMessage(), mapIPage);
     }
 
     @GetMapping(value="checkUser")
