@@ -3,6 +3,7 @@ package com.family.entity;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -94,6 +95,8 @@ public class People implements Serializable {
     /**
      * 生
      */
+//    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime birthDay;
 
     /**
@@ -155,6 +158,7 @@ public class People implements Serializable {
     /**
      * 卒
      */
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime deathDay;
 
     /**

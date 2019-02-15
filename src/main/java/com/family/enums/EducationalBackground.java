@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum EducationalBackground implements IndexEnum {
+    ILLITERACY("无",0),
     PRIMARY_SCHOOL("小学",1),
     MIDDLE_SCHOOL("初中",2),
     HIGH_SCHOOL("高中",3),
