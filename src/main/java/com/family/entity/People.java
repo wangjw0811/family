@@ -2,6 +2,7 @@ package com.family.entity;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
@@ -95,9 +96,7 @@ public class People implements Serializable {
     /**
      * 生
      */
-//    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime birthDay;
+    private Date birthDay;
 
     /**
      * 婚嫁
@@ -158,8 +157,7 @@ public class People implements Serializable {
     /**
      * 卒
      */
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime deathDay;
+    private Date deathDay;
 
     /**
      * 葬地
