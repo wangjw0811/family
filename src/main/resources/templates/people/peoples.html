@@ -118,14 +118,17 @@
                     type: 2,
                     skin: 'CLYM-style',
                     area: ['950px', '560px'],
-                    title: '账户信息',
+                    title: '详细信息',
                     content: '/toPeopleDetail',
+                    btn: ['关闭'],
+                    closeBtn: 1, //关闭按钮是否显示 1显示0不显示
                     success: function (layero, index) {
                         var body = layer.getChildFrame('body', index);//建立父子联系
                         // var iframeWin = window[layero.find('iframe')[0]['name']];
                         // console.log(arr); //得到iframe页的body内容
-                        console.log(body.find('input'));
+                        //console.log(body.find('input'));
                         var inputList = body.find('input');
+                        // console.log(inputList);
                         for (var j = 0; j < inputList.length; j++) {
                             $(inputList[j]).val(arr[j]);
                         }
