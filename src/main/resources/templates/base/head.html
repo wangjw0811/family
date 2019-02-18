@@ -18,18 +18,23 @@
                     </li>
                 </ul>
                 <ul class="layui-nav layui-layout-right">
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">
-                            <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                            贤心
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="">基本资料</a></dd>
-                            <dd><a href="">安全设置</a></dd>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item"><a id="loginBtn" href="javascript:void(0)" >登录</a></li>
-                    <!--<li class="layui-nav-item"><a href="/toRegister">注册</a></li>-->
+                    <div th:if="${session.user} != null">
+                        <li class="layui-nav-item">
+                            <a href="javascript:;">
+                                <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                                贤心
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd><a href="/loginSuccess" target="contain">个人中心</a></dd>
+                                <dd><a href="#">修改密码</a></dd>
+                                <dd><a href="/logOut" target="contain">注销</a></dd>
+                            </dl>
+                        </li>
+                    </div>
+                    <div th:if="${session.user} == null">
+                        <li class="layui-nav-item"><a id="loginBtn" href="javascript:void(0)" >登录</a></li>
+                        <!--<li class="layui-nav-item"><a href="/toRegister">注册</a></li>-->
+                    </div>
                 </ul>
             </div>
         </nav>

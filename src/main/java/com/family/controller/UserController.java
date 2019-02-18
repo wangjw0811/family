@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,7 +51,12 @@ public class UserController {
     @GetMapping(value="checkUser")
     @ApiOperation(value = "查询")
     @ResponseBody
-    public ResponseResult checkUser(User user,String account){
+    public ResponseResult checkUser(User user, String account, HttpServletRequest request, HttpServletResponse response){
+        Object session = request.getSession().getAttribute("user");
+        if(session != null){//若session 不为空，直接跳转登录成功
+            log.info(session.toString());
+            return new ResponseResult(ResultCode.SUCCESS.getIndex(),ResultCode.SUCCESS.getMessage(),user);
+        }
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         String password = user.getPassword();
         user.setEmail(account);//先通过邮箱匹配
@@ -63,13 +70,12 @@ public class UserController {
             user = userService.getOne(wrapper);
         }
         if(user != null){
+            request.getSession().setAttribute("user",user);//登录成功，将用户数据放入到Session中
             return new ResponseResult(ResultCode.SUCCESS.getIndex(),ResultCode.SUCCESS.getMessage(),user);
         }else{
             return new ResponseResult(ResultCode.FAILURE.getIndex(),"账号或密码错误",user);
         }
-
     }
-
 
     @PutMapping(value = "user")
     @ResponseBody

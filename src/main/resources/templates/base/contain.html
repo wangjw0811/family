@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script type="text/javascript">
+    layui.use(['form'], function () {
+        var form = layui.form,
+            $ = layui.jquery
+        ;
+        form.on('submit(form)', function (data) {
+            var param = data.field;//定义临时变量获取表单提交过来的数据，非json格式
+            $.ajax({
+                url: "/",
+                type: "get",
+                data: param,
+                dataType: "json",
+                success: function (data) {//res为相应体,function为回调函数
+                }
+            })
+            return false
+        });
+
+    })
+</body>
+</html>
