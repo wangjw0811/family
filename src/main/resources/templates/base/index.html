@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>家族网</title>
-    <link type="text/css" href="layui/css/layui.css" rel="stylesheet"/>
+    <div th:replace="base/common :: common_resource"></div>
+    <title>首页</title>
 </head>
 <body>
 <div th:replace="base/head :: header"></div>
@@ -19,7 +18,6 @@
     </div>
 </div>
 <div th:replace="base/foot :: footer"></div>
-<script src="./layui/layui.js"></script>
 <script>
     layui.config({
         base:"./lib/"
