@@ -205,12 +205,6 @@
             <input type="text" name="description" autocomplete="off" placeholder="" class="layui-input">
         </div>
     </div>
-    <div class="layui-form-item">
-        <div class="layui-input-block">
-            <button class="layui-btn" type="button" lay-submit="" lay-filter="commit">立即提交</button>
-            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-        </div>
-    </div>
 </form>
 
 
@@ -221,7 +215,6 @@
             $ = layui.jquery
         ;
         var data = $("#sid").value;
-        alert(data);
         //表单初始赋值
         form.val('example', {
             "genealogyName": "贤心" // "name": "value"
