@@ -1,19 +1,20 @@
 package com.family.controller;
 
-import com.family.service.impl.UserServiceImpl;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @Controller
 public class LoginController {
-    @Autowired
-    UserServiceImpl userService;
+
+    @GetMapping(value="/")
+    @ApiOperation(value = "首页")
+    public String toIndex(){
+        return "base/index";
+    }
+
     @GetMapping(value="toLogin")
     @ApiOperation(value = "登录界面")
     public String toLogin(){

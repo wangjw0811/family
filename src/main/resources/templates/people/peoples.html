@@ -23,7 +23,7 @@
 </script>
 
 
-<script type="text/javascript" src="layui/layui.all.js"></script>
+<script type="text/javascript" src="layui/layui.js"></script>
 <script>
     layui.use(['laypage', 'layer', 'table', 'element'], function () {
         var layer = layui.layer //弹层
@@ -124,7 +124,7 @@
                     success: function (layero, index) {
                         var body = layer.getChildFrame('body', index);//建立父子联系
                         // var iframeWin = window[layero.find('iframe')[0]['name']];
-                        // console.log(arr); //得到iframe页的body内容
+                        console.log(arr); //得到iframe页的body内容
                         console.log(body.find('input'));
                         var inputList = body.find('input');
                         for (var j = 0; j < inputList.length; j++) {

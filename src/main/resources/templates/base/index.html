@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>家族网</title>
+    <link type="text/css" href="layui/css/layui.css" rel="stylesheet"/>
+</head>
+<body>
+<div th:replace="base/head :: header"></div>
+<div>
+    <!--<div>-->
+    <!--<embed src="/mv/a.mp4" width="320" height="240"/>-->
+    <!--</div>-->
+    <!--<div>-->
+    <!--<embed src="/mv/b.mp4" width="320" height="240"/>-->
+    <!--</div>-->
+    <div>
+        <iframe width="100%" name="contain" frameborder="no" height="900"></iframe>
+    </div>
+</div>
+<div th:replace="base/foot :: footer"></div>
+<script src="./layui/layui.js"></script>
+<script>
+    layui.config({
+        base:"./lib/"
+    }).use("index");
+</script>
+</body>
+</html>
