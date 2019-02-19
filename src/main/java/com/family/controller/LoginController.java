@@ -31,12 +31,12 @@ public class LoginController {
 
     //用户登出
     @GetMapping(value = "logOut")
-    public String logOut(HttpServletRequest request, HttpServletResponse response){
+    public String logOut(HttpServletRequest request){
         HttpSession session = request.getSession(false);//防止创建Session
         if(session != null){
             session.removeAttribute("user");
         }
-        return "base/login";
+        return "redirect:/";
     }
 
     //注册界面
