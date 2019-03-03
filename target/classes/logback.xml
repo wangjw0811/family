@@ -10,7 +10,7 @@
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- <Encoding>UTF-8</Encoding> -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>logs/logback/springboot_%d{yyyy-MM-dd}.log
+            <FileNamePattern>../log/family/springboot_%d{yyyy-MM-dd}.log
             </FileNamePattern>
             <MaxHistory>10</MaxHistory>
         </rollingPolicy>
@@ -21,7 +21,7 @@
     <appender name="mybatis-plus"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>logs/logback/mybatis-plus_%d{yyyy-MM-dd}.log
+            <FileNamePattern>../log/family/family_%d{yyyy-MM-dd}.log
             </FileNamePattern>
             <MaxHistory>10</MaxHistory>
         </rollingPolicy>

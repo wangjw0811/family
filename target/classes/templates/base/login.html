@@ -10,20 +10,22 @@
 <body>
 <div class="login-main">
     <header class="layui-elip">后台登录</header>
-    <form class="layui-form" >
+    <form class="layui-form">
         <div class="layui-input-inline">
-            <input type="text" name="email" required  lay-verify="required" placeholder="账号" autocomplete="off" class="layui-input">
+            <input type="text" name="account" required lay-verify="required" placeholder="身份证号/邮箱" autocomplete="off"
+                   class="layui-input" value="2345678908">
         </div>
         <div class="layui-input-inline">
-            <input type="password" name="password" required  lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
+            <input type="password" name="password" required lay-verify="required" placeholder="密码（默认为身份证后6位）"
+                   autocomplete="off" class="layui-input" value="678908">
         </div>
         <div class="layui-input-inline login-btn">
-            <button type="button" class="layui-btn" lay-submit lay-filter="form">登录</button>
+            <button id="login" type="button" class="layui-btn" lay-submit lay-filter="form">登录</button>
         </div>
         <hr/>
         <p>
-            <a href="/toRegister" class="fl">立即注册</a>
-            <!--<a href="javascript:;" class="fr">忘记密码？</a>-->
+            <!--<a href="/toRegister" class="fl">立即注册</a>-->
+            <a href="javascript:;" class="fr">忘记密码？</a>
         </p>
     </form>
 </div>
@@ -33,20 +35,22 @@
         var form = layui.form,
             $ = layui.jquery
         ;
-        form.on('submit(form)', function(data) {
-            var param=data.field;//定义临时变量获取表单提交过来的数据，非json格式
+        form.on('submit(form)', function (data) {
+            var param = data.field;//定义临时变量获取表单提交过来的数据，非json格式
             $.ajax({
-                url:"/api/checkUser",
-                type:"get",
-                data:param,
-                success:function(data){//res为相应体,function为回调函数
-                    if(data.resultCode==200){
-                        window.location.href="/loginSuccess";
-                    }else{
-                        layer.msg(data.resultMsg);
+                url: "/api/checkUser",
+                type: "get",
+                data: param,
+                dataType: "json",
+                success: function (data) {//res为相应体,function为回调函数
+                    if (data.resultCode == 200) {
+                        top.closeToLogin();
+                    } else {
+                        top.layui.layer.msg(data.resultMsg);
                     }
                 }
-            });
+            })
+            return false
         });
 
     });

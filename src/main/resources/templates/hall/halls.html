@@ -34,6 +34,7 @@
         var layer = layui.layer //弹层
             ,table = layui.table //表格
             ,element = layui.element //元素操作
+            ,$ = layui.jquery
 
         //监听Tab切换
         element.on('tab(demo)', function (data) {
@@ -107,9 +108,33 @@
         //监听行工具事件
         table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
             var data = obj.data //获得当前行数据
-                , layEvent = obj.event; //获得 lay-event 对应的值
+                , layEvent = obj.event //获得 lay-event 对应的值
+                , arr = [];
             if (layEvent === 'detail') {
-                layer.msg('查看操作');
+                // layer.msg('查看操作');
+                for(var i in data){
+                    arr.push(i,data[i]);
+                }
+                layer.open({
+                    type: 2,
+                    skin: 'CLYM-style',
+                    area: ['530px', '500px'],
+                    title: '详细信息',
+                    content: '/toHallDetail',
+                    btn: ['关闭'],
+                    closeBtn: 1, //关闭按钮是否显示 1显示0不显示
+                    success: function (layero, index) {
+                        var body = layer.getChildFrame('body', index);//建立父子联系
+                        var inputList = body.find('input');
+                        for (var j = 0; j < inputList.length; j++) {
+                            for(var i in data){
+                               if(inputList[j].name == i){
+                                   $(inputList[j]).val(data[i]);
+                               }
+                            }
+                        }
+                    }
+                });
             } else if (layEvent === 'del') {
                 layer.confirm('真的删除行么', function (index) {
                     obj.del(); //删除对应行（tr）的DOM结构
