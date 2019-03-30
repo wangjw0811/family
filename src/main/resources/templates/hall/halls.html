@@ -69,8 +69,8 @@
                     {type: 'checkbox', fixed: 'left'}
                     // ,{field: 'id', title: 'ID', width:300, sort: true, fixed: 'left', totalRowText: '合计：'}
                     , {field: 'surname', title: '姓氏', width: 80}
-                    , {field: 'hall_name', title: '堂号', width: 80}
-                    , {field: 'hall_couplets', title: '堂联', width: 80}
+                    , {field: 'hallName', title: '堂号', width: 80}
+                    , {field: 'hallCouplets', title: '堂联', width: 80}
                     , {field: 'seniorities', title: '字辈', width: 300}
                     , {fixed: 'right', width: 165, align: 'center', toolbar: '#barDemo'}
                 ]
@@ -83,8 +83,7 @@
                 , data = checkStatus.data; //获取选中的数据
             switch (obj.event) {
                 case 'add':
-                    layer.msg('添加');
-                    break;
+                    window.location.href = "/toAddHall";
                 case 'update':
                     if (data.length === 0) {
                         layer.msg('请选择一行');
@@ -142,7 +141,7 @@
                     //向服务端发送删除指令
                 });
             } else if (layEvent === 'edit') {
-                layer.msg('编辑操作');
+                window.location.href = "/toModifyHall?id="+data.id;
             }
         });
     });

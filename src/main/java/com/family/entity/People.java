@@ -1,14 +1,12 @@
 package com.family.entity;
 
-import java.time.LocalDateTime;
-import java.io.Serializable;
-import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -26,6 +24,11 @@ public class People implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String id;
+
+    /**
+     * 堂号id
+     */
+    private String hallId;
 
     /**
      * 父级id

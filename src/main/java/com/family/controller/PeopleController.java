@@ -4,11 +4,9 @@ package com.family.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.family.entity.Hall;
 import com.family.entity.People;
 import com.family.entity.User;
 import com.family.enums.ResultCode;
-import com.family.service.impl.HallServiceImpl;
 import com.family.service.impl.PeopleServiceImpl;
 import com.family.service.impl.UserServiceImpl;
 import com.family.utils.Common;
@@ -44,20 +42,21 @@ public class PeopleController {
     @GetMapping(value = "/people")
     @ResponseBody
     @ApiOperation(value = "人员查询")
-    public ResponseResult getSurname(People people) {
+    public ResponseResult getPeople(People people) {
         QueryWrapper<People> wrapper = new QueryWrapper<>();
         wrapper.setEntity(people);
-        people = peopleService.getOne(wrapper);
-        return new ResponseResult(ResultCode.SUCCESS.getIndex(), ResultCode.SUCCESS.getMessage(), people);
+        List<People> list = peopleService.list(wrapper);
+        return new ResponseResult(ResultCode.SUCCESS.getIndex(), ResultCode.SUCCESS.getMessage(), list);
     }
 
     @GetMapping(value = "/peoples")
     @ResponseBody
     @ApiOperation(value = "分页查询人员")
-    public ResponseResult getSurnames(People people) {
+    public ResponseResult getPeoples(People people) {
         IPage<People> page = new Page<>(1,10);
         QueryWrapper<People> wrapper = new QueryWrapper<>();
         wrapper.setEntity(people);
+        wrapper.orderByAsc("generation");
         IPage<Map<String, Object>> mapIPage = peopleService.pageMaps(page, wrapper);
         return new ResponseResult(ResultCode.SUCCESS.getIndex(), ResultCode.SUCCESS.getMessage(), mapIPage);
     }
@@ -65,7 +64,7 @@ public class PeopleController {
     @PostMapping(value = "/addPeople")
     @ResponseBody
     @ApiOperation(value = "人员新增")
-    public ResponseResult addSurname(@RequestBody People people) {
+    public ResponseResult addPeople(@RequestBody People people) {
         people.setId(Common.getId());
         boolean flag = peopleService.save(people);
         if (flag) {
@@ -75,11 +74,11 @@ public class PeopleController {
         }
     }
 
-    @PostMapping(value = "/people")
+    @PostMapping(value = "/modifyPeople")
     @ResponseBody
     @ApiOperation(value = "人员修改")
     @Transactional
-    public ResponseResult modifySurname(@RequestBody People people) {
+    public ResponseResult modifyPeople(@RequestBody People people) {
         boolean flag = peopleService.updateById(people);
         people = peopleService.getById(people.getId());
         if (flag) {

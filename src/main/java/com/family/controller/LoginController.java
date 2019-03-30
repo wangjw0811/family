@@ -2,10 +2,10 @@ package com.family.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Slf4j
@@ -45,6 +45,11 @@ public class LoginController {
         return "base/register";
     }
 
+    @GetMapping(value="toAddUser")
+    public String toAddUser(){
+        return "user/addUser";
+    }
+
     //用户列表界面
     @GetMapping(value = "toUsers")
     public String toUsers(){
@@ -55,6 +60,19 @@ public class LoginController {
     @GetMapping(value = "toHalls")
     public String toHalls(){
         return "hall/halls";
+    }
+
+    //新增姓氏信息
+    @GetMapping(value = "toAddHall")
+    public String addHalls(){
+        return "hall/addHall";
+    }
+
+    //姓氏信息修改
+    @GetMapping(value = "toModifyHall")
+    public String modifyHall(Model model, HttpServletRequest request){
+        model.addAttribute(request.getParameter("id"));
+        return "hall/modifyHall";
     }
 
     //姓氏信息详情
@@ -79,6 +97,12 @@ public class LoginController {
     @GetMapping(value = "toPeopleDetail")
     public String peopleDetail(){
         return "people/peopleDetail";
+    }
+
+    //族员信息修改
+    @GetMapping(value = "toModifyPeople")
+    public String modifyPeople(HttpServletRequest request){
+        return "people/modifyPeople";
     }
 
 }

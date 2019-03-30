@@ -7,19 +7,28 @@
 </head>
 <body>
 <div class="layui-side layui-bg-black">
-    <div class="layui-side-scroll">
+    <div class="layui-tab layui-tab-card site-demo-button" style="position: relative;">
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-        <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        <ul class="layui-nav layui-nav-tree layui-nav-side"><!--lay-filter="test"-->
             <li class="layui-nav-item layui-nav-itemed">
                 <a href="javascript:;">姓氏</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="/toHalls"  target="main">新增</a></dd>
-                    <dd><a href="/toHalls"  target="main">查询</a></dd>
+                    <dd><a href="/toHalls"  target="main" class="site-demo-active" data-id="0"  data-url="/toHalls" data-title="查询" data-type="tabAdd">查询</a></dd>
+                    <dd><a href="/toAddHall"  target="main" class="site-demo-active" data-id="1"  data-url="/toAddHall" data-title="新增" data-type="tabAdd">新增</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="/toUsers"  target="main">用户</a></li>
-            <li class="layui-nav-item"><a href="/toPeoples"  target="main">族员</a></li>
+            <li class="layui-nav-item"><a href="/toUsers" target="main" class="site-demo-active"  data-id="2" data-title="用户" data-url="c"  data-type="tabAdd">用户</a></li>
+            <li class="layui-nav-item"><a href="/toPeoples" target="main" class="site-demo-active" data-id="3" data-title="族员"  data-url="d" data-type="tabAdd">族员</a></li>
         </ul>
+
+        <div class="layui-tab" lay-filter="demo" lay-allowclose="true" style="margin-left: 200px;">
+            <ul class="layui-tab-title"></ul>
+            <ul class="rightmenu" style="display: none;position: absolute;">
+                <li data-type="closethis">关闭当前</li>
+                <li data-type="closeall">关闭所有</li>
+            </ul>
+            <div class="layui-tab-content"></div>
+        </div>
     </div>
 </div>
 
@@ -32,12 +41,6 @@
 </div>
 </div>
 <script type="text/javascript" src="layui/layui.all.js"></script>
-<script>
-    //JavaScript代码区域
-    layui.use('element', function(){
-        var element = layui.element;
-
-    });
-</script>
+<script type="text/javascript" src="layui/system1.js"></script>
 </body>
 </html>

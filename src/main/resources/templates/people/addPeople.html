@@ -16,24 +16,21 @@
 <form class="layui-form">
     <div class="layui-inline-item">
         <div class="layui-inline">
+            <label class="layui-form-label">堂号</label>
+            <div class="layui-input-inline">
+                <select name="hallId" id="hallId" lay-verify="required" lay-search="" lay-filter="hall"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
             <label class="layui-form-label">第几代</label>
             <div class="layui-input-inline">
-                <select name="generation" lay-verify="required" lay-search="">
-                    <option value="">后续根据字辈自动获取</option>
-                    <option value="16">第十六世</option>
-                    <option value="17">第十七世</option>
-                    <option value="18">第十八世</option>
-                    <option value="19">第十九世</option>
-                    <option value="20">第二十世</option>
-                </select>
+                <select name="generation" id="generation" lay-verify="required" lay-search="" lay-filter="generation"></select>
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">父亲</label>
             <div class="layui-input-inline">
-                <select name="parentId" lay-search="">
-                    <option value=""></option>
-                </select>
+                <select name="parentId" id="parentId" lay-search=""> </select>
             </div>
         </div>
         <div class="layui-inline">
@@ -89,7 +86,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">辈分</label>
             <div class="layui-input-block">
-                <input type="text" name="seniority" lay-verify="required" autocomplete="off" placeholder="" class="layui-input">
+                <input type="text" name="seniority" id="seniority" readonly lay-verify="required" autocomplete="off" placeholder="" class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
@@ -221,6 +218,75 @@
             ,laydate = layui.laydate
             ,$ = layui.jquery;
 
+        $.ajax({
+            url:'api/hall',
+            dataType:'json',
+            type:'get',
+            success:function(data){
+                $.each(data.data,function(index,item){
+                    $('#hallId').append(new Option("",""));
+                    $('#hallId').append(new Option(item.surname,item.id));//往下拉菜单里添加元素
+                })
+                form.render();//菜单渲染 把内容加载进去
+            }
+        });
+        //级联子项目
+        //select 监听
+        form.on('select(hall)',function(data){
+            var id=data.value;  //select选中的值
+            $.ajax({
+                url:"api/getSenioritiesById",
+                data:{id:id},
+                dataType:"json",
+                success:function(resultData){
+                    if(resultData.resultCode == 200){
+                        //清空赋值
+                        $('#seniority').val("");
+                        $("#parentId").empty();
+                        $("#generation").empty();
+                        $("#generation").append(new Option("请选择代数", ""));
+                        $.each(resultData.data, function(index, item) {
+                            //赋值
+                            $('#generation')
+                                .append(new Option(item.generationDesc, item.generation));
+                        });
+                    }else{
+                        $("#generation").append(new Option("暂无数据", ""));
+                    }
+                    layui.form.render("select");
+                }
+            })
+        });
+
+        //给辈分赋值,并查询父辈列表
+        form.on('select(generation)',function(data){
+            var generation = data.value;//代数
+            var seniority=data.elem[generation].innerHTML;  //获取下拉文本值
+            seniority = seniority.substring(seniority.indexOf("(")+1,seniority.indexOf(")"));
+            $('#seniority').val(seniority);
+            $.ajax({
+                url:"api/people",
+                data:{"generation":generation-1},
+                dataType:"json",
+                success:function(resultData){
+                    if(resultData.resultCode == 200){
+                        //清空赋值
+                        $("#parentId").empty();
+                        $("#parentId").append(new Option("请选择父辈", ""));
+                        $.each(resultData.data, function(index, item) {
+                            //赋值
+                            $('#parentId')
+                                .append(new Option(item.forename, item.id));
+                        });
+                    }else{
+                        $("#parentId").append(new Option("暂无数据", ""));
+                    }
+                    layui.form.render("select");
+                }
+            })
+        });
+
+        layui.form.render("select");
         //日期
         laydate.render({
             elem: '#birthDay'
