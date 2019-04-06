@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -52,11 +53,15 @@ public class PeopleController {
     @GetMapping(value = "/peoples")
     @ResponseBody
     @ApiOperation(value = "分页查询人员")
-    public ResponseResult getPeoples(People people) {
-        IPage<People> page = new Page<>(1,10);
+    public ResponseResult getPeoples(People people, HttpServletRequest request) {
+        String current  = request.getParameter("page");
+        String pageSize = request.getParameter("limit");
+        IPage<People> page = new Page<>();
+        page.setSize(Long.parseLong(pageSize));
+        page.setCurrent(Long.parseLong(current));
         QueryWrapper<People> wrapper = new QueryWrapper<>();
         wrapper.setEntity(people);
-        wrapper.orderByAsc("generation");
+        wrapper.orderByAsc("generation","birth_day");
         IPage<Map<String, Object>> mapIPage = peopleService.pageMaps(page, wrapper);
         return new ResponseResult(ResultCode.SUCCESS.getIndex(), ResultCode.SUCCESS.getMessage(), mapIPage);
     }

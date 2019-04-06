@@ -16,7 +16,29 @@
 <body>
 
 <table class="layui-hide" id="demo" lay-filter="test"></table>
-
+<div id="template">
+    <script type="text/html" id="sex">
+        <div>
+            {{# var fu = function(){
+                            var sex = d.sex;
+                            if(sex == 1){return "男";}
+                            else if(sex == 0){return "女";}
+                         }
+            }}
+            {{fu()}}
+        </div>
+    </script>
+    <script type="text/html" id="birthday">
+        <div>
+            {{# var fu = function(){
+                            var birthday = d.birth_day;
+                            if(null != birthday){return layui.util.toDateString(birthday, "yyyy-MM-dd");}
+                          }
+            }}
+            {{fu()}}
+        </div>
+    </script>
+</div>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-primary layui-btn-xs" id="detail" lay-event="detail">查看</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
@@ -31,8 +53,8 @@
             , table = layui.table //表格
             , element = layui.element //元素操作
             , $ = layui.jquery
+            , laypage = layui.laypage
         ;
-
         //监听Tab切换
         element.on('tab(demo)', function (data) {
             layer.tips('切换了 ' + data.index + '：' + this.innerHTML, this, {
@@ -43,7 +65,7 @@
         //执行一个 table 实例
         table.render({
             elem: '#demo'
-            , height: 420
+            , height: 1563
             , url: '/api/peoples/' //数据接口
             , type: 'get'
             , title: '用户表'
@@ -64,17 +86,23 @@
             , cols: [//表头
                 [
                     {type: 'checkbox', fixed: 'left'}
-                    // ,{field: 'id', title: 'ID', width:300, sort: true, fixed: 'left', totalRowText: '合计：'}
-                    , {field: 'surname', title: '姓氏', width: 80}
-                    , {field: 'forename', title: '名', width: 80}
+                    , {field: 'surname', title: '姓氏', width: 80, fixed: 'left'}
+                    , {field: 'forename', title: '名', width: 80, fixed: 'left'}
+                    , {field: 'birth_day', title: '出生日期', width:100, sort: true,templet: '#birthday'}
                     , {field: 'style_name', title: '字', width: 80}
                     , {field: 'seniority', title: '辈分', width: 80}
                     , {field: 'generation', title: '代数', width: 80}
                     , {field: 'genealogy_name', title: '谱名', width: 80}
-                    , {field: 'sex', title: '性别', width: 80}
+                    , {field: 'sex', title: '性别', width: 80, templet: '#sex'}
                     , {fixed: 'right', width: 165, align: 'center', toolbar: '#barDemo'}
                 ]
             ]
+        });
+
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'demo' //注意，这里的 demo 是 ID，不用加 # 号
+            ,count: 14 //数据总数，从服务端得到
         });
 
         //监听头工具栏事件

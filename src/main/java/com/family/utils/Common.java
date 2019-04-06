@@ -65,6 +65,11 @@ public class Common {
         return md5code;
     }
 
+    /**
+     * 阿拉伯数字转中文数字
+     * @param numerals
+     * @return
+     */
     public static String arabicToChinese(Integer numerals) {
         String str = numerals.toString();
         String[] s1 = { "零", "一", "二", "三", "四", "五", "六", "七", "八", "九" };
@@ -79,7 +84,6 @@ public class Common {
                 result += s1[num];
             }
         }
-        System.out.println(result);
         return result;
     }
 }
