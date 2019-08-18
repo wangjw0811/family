@@ -1,9 +1,10 @@
 package com.family.entity;
 
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -22,7 +23,7 @@ public class User implements Serializable {
     /**
      * 主键id
      */
-    private String id;
+    private Integer id;
 
     /**
      * 人员id

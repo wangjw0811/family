@@ -97,7 +97,6 @@ public class PeopleController {
                 if(list.size() == 0){
                     //账号不存在则创建创号
                     User user = new User();
-                    user.setId(Common.getId());
                     user.setIdNumber(Common.md5(idNumber));
                     user.setPeopleId(people.getId());
                     //默认取名作为登录的用户名
